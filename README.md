@@ -5,8 +5,10 @@ cd ~
 git clone https://github.com/donydex/saasi-demo.git
 # 配置mvn阿里云镜像
 路径:
+
 /usr/local/webserver/apache-maven-3.3.9/conf
 添加:
+
 <mirror>  
     <id>nexus-aliyun</id>  
     <mirrorOf>central</mirrorOf>    
@@ -19,8 +21,11 @@ git clone https://github.com/donydex/saasi-demo.git
 docker search 镜像关键字
 
 docker 安装mysql
+
 http://www.runoob.com/docker/docker-install-mysql.html
+
 docker pull mysql:5.7
+
 (最新的8会报错)
 
 docker run -p 3306:3306 --name mymysql -v $PWD/conf:/etc/mysql/conf.d -v $PWD/logs:/logs -v $PWD/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
@@ -33,7 +38,8 @@ mysql -uroot -p123456
 https://blog.csdn.net/dongdong9223/article/details/71425077
 
 docker cp $PWD/springboot.sql mymysql:/home/
-注意容器后没有空格
+
+注意容器名后没有空格
 
 /home/springboot.sql
 
@@ -45,10 +51,14 @@ http://database.51cto.com/art/201107/277687.htm
 -------------------------------------------------------
 # Demo 镜像构建&运行容器部分
 cd springboot-mybatis-demo
+
 mvn clean install
+
 写dockerfile
+
 使用dockerfile：
 https://www.jianshu.com/p/93a678d1bde6
+
 ```
 FROM java:8-jre
 
