@@ -45,11 +45,13 @@ docker cp $PWD/springboot.sql mymysql:/home/
 
 mysql运行命令行
 http://database.51cto.com/art/201107/277687.htm
+
 第一种方式：在未连接数据库的情况下，输入 mysql -h localhost -u root -p 123456  < /home/springboot.sql 回车即可；
 
 第二种方式：在已连接数据库的情况下，此时命令提示符为mysql>，输入 source /home/springboot.sql。
--------------------------------------------------------
+
 # Demo 镜像构建&运行容器部分
+
 cd springboot-mybatis-demo
 
 mvn clean install
