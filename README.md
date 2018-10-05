@@ -1,9 +1,8 @@
-"# saasi-demo" 
-实验步骤:
-到目标目录,此处以根目录为例子
+# saasi-demo
+# 实验步骤:
 cd ~
 git clone https://github.com/donydex/saasi-demo.git
-配置mvn阿里云镜像
+# 配置mvn阿里云镜像
 路径:
 /usr/local/webserver/apache-maven-3.3.9/conf
 添加:
@@ -14,7 +13,7 @@ git clone https://github.com/donydex/saasi-demo.git
     <url>http://maven.aliyun.com/nexus/content/groups/public</url>  
 </mirror> 
 ------------------------------------------
-数据库安装部分：
+# 数据库安装部分：
 查找docker镜像
 docker search 镜像关键字
 
@@ -43,6 +42,7 @@ http://database.51cto.com/art/201107/277687.htm
 
 第二种方式：在已连接数据库的情况下，此时命令提示符为mysql>，输入 source /home/springboot.sql。
 -------------------------------------------------------
+# Demo 镜像构建&运行容器部分
 cd springboot-mybatis-demo
 mvn clean install
 写dockerfile
@@ -57,21 +57,21 @@ CMD ["java", "-Xmx200m", "-jar", "/app/springboot-mybatis-demo-0.0.1-SNAPSHOT.ja
 
 EXPOSE 8080
 ```
-创建镜像:
+## 创建镜像:
 docker build --rm -t springboot-mybatis-demo:base .
   
-运行容器：
+## 运行容器：
 docker run -p 8080:8080 --name springboot-mybatis-demo -d springboot-mybatis-demo:base
   
-查看docker log
+## 查看docker log
 sudo docker logs -f -t --tail 行数 容器名
   
-linux批量查找文件内容
+## linux批量查找文件内容
 https://blog.csdn.net/ilove737/article/details/48372281
   
   
 -----------------------------------
-重命名docker容器名
+## 重命名docker容器名
 docker rename old容器名  new容器名
 
 
