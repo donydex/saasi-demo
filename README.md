@@ -117,4 +117,12 @@ kubectl get pods --all-namespaces 查看你集群中pod状态
 
 kuebctl get svc --all-namespaces 查看集群中的服务的状态
 
+## docker 链接spring boot和mysql容器
+
+参考链接：
+
+https://blog.csdn.net/happyyear1/article/details/72314147
+
+docker run -d -p 8088:8080 –name spring-web –link docker-mysql:mysql loveqh/spring-boot-mysql-docker
+
 
