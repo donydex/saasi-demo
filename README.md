@@ -76,16 +76,6 @@ EXPOSE 8080
 ## 创建镜像:
 docker build --rm -t springboot-mybatis-demo:base .
   
-## 运行容器：
-docker run -p 8080:8080 --name springboot-mybatis-demo -d springboot-mybatis-demo:base
-
-注意，此处应该加 --net = host，因为docker会给启动的容器自动配置ip，但是项目里配置的mysql地址是localhost，在容器内连接localhost是连接容器本身而不是宿主机的localhost，所以一直找不到mysql。所以采用host的网络方式将容器与宿主机共用一个Network Namespace,这样容器内localhost就是宿主机的localhost了。
-
-参考链接: 
-
-https://blog.csdn.net/begin1013/article/details/80860224
-
-docker run -p --net=host 8080:8080 --name springboot-mybatis-demo -d springboot-mybatis-demo:base
 
 
   
@@ -124,10 +114,36 @@ kuebctl get svc --all-namespaces 查看集群中的服务的状态
 
 ## docker 链接spring boot和mysql容器
 
+第一种方式:
+
+1.修改application.yml:把localhost改为mysql
+
+2.通过--link把两个容器链接起来，
+
 参考链接：
 
 https://blog.csdn.net/happyyear1/article/details/72314147
 
-docker run -d -p 8088:8080 –name spring-web –link docker-mysql:mysql loveqh/spring-boot-mysql-docker
+docker run -d -p 8080:8080 --name spring-demo --link mymysql:mysql spring-demo
+
+第二种方式:
+
+添加 --net=host
+
+参考链接: 
+
+https://blog.csdn.net/begin1013/article/details/80860224
+
+采用host的网络方式将容器与宿主机共用一个Network Namespace,这样容器内localhost就是宿主机的localhost了
+
+
+注意，此处应该加 --net = host，因为docker会给启动的容器自动配置ip，但是项目里配置的mysql地址是localhost，在容器内连接localhost是连接容器本身而不是宿主机的localhost，所以一直找不到mysql。所以采用host的网络方式将容器与宿主机共用一个Network Namespace,这样容器内localhost就是宿主机的localhost了。
+
+
+docker run -p --net=host 8080:8080 --name springboot-mybatis-demo -d springboot-mybatis-demo:base
+
+总结:
+
+两种都是可行的，推荐使用第一种，因为后面服务很多的话，第一种更安全。
 
 
