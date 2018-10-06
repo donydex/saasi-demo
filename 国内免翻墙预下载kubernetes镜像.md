@@ -1,3 +1,7 @@
+# 参考链接
+
+https://ystyle.top/2018/07/02/pre-download-kubernetes-image/#%E4%B8%8B%E8%BD%BD%E8%84%9A%E6%9C%AC
+
 # 当前组件版本信息
 ```
 组件 	变量 	版本
