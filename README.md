@@ -271,15 +271,13 @@ Error: Package: docker-ce-17.03.2.ce-1.el7.centos.x86_64 (docker-ce-stable)
  You could try running: rpm -Va --nofiles --nodigest
 ```
 
-解决办法
+## 解决办法
 
-# 要先安装docker-ce-selinux-17.03.2.ce，否则安装docker-ce会报错
-# 注意docker-ce-selinux的版本 要与docker的版本一致
+要先安装docker-ce-selinux-17.03.2.ce，否则安装docker-ce会报错
+注意docker-ce-selinux的版本 要与docker的版本一致
 
 yum install -y https://download.docker.com/linux/centos/7/x86_64/stable/Packages/docker-ce-selinux-17.03.2.ce-1.el7.centos.noarch.rpm
 
-# 或者
+或者
 
 yum -y install https://mirrors.aliyun.com/docker-ce/linux/centos/7/x86_64/stable/Packages/docker-ce-selinux-17.03.2.ce-1.el7.centos.noarch.rpm
-
-参考链接
