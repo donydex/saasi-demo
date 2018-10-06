@@ -146,4 +146,18 @@ docker run -p --net=host 8080:8080 --name springboot-mybatis-demo -d springboot-
 
 两种都是可行的，推荐使用第一种，因为后面服务很多的话，第一种更安全。
 
+## 虚拟机更新yum源为阿里镜像
 
+link：
+
+https://blog.csdn.net/inslow/article/details/54177191
+
+mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
+
+cd /etc/yum.repos.d/
+
+wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+
+yum makecache
+
+yum -y update
