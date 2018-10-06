@@ -112,6 +112,9 @@ kubectl delete deployments --all
 
 ## 状态查看
 kubectl get nodes 查看你集群的机器的状态
+
 kubectl get pods --all-namespaces 查看你集群中pod状态
+
 kuebctl get svc --all-namespaces 查看集群中的服务的状态
+
 
