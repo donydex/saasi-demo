@@ -110,5 +110,8 @@ kubectl delete deployments --all
 
 无论各种方式生成的pod, 均可以使用如下命令强制删除: kubectl delete pods <pod> --grace-period=0 --force 
 
-
+## 状态查看
+kubectl get nodes 查看你集群的机器的状态
+kubectl get pods --all-namespaces 查看你集群中pod状态
+kuebctl get svc --all-namespaces 查看集群中的服务的状态
 
