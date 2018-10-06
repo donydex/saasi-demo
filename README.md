@@ -161,3 +161,125 @@ wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-
 yum makecache
 
 yum -y update
+
+## 虚拟机安装k8s集群
+### 关闭防火墙
+
+systemctl stop firewalld
+
+systemctl disable firewalld
+### 禁用SELINUX
+
+#### 临时禁用
+setenforce 0
+
+#### 永久禁用 
+vim /etc/selinux/config    # 或者修改/etc/sysconfig/selinux
+
+SELINUX=disabled
+
+### 修改k8s.conf文件
+
+cat <<EOF >  /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+EOF
+sysctl --system
+    
+### 关闭swap
+
+# 临时关闭
+swapoff -a
+
+修改 /etc/fstab 文件，注释掉 SWAP 的自动挂载（永久关闭swap，重启后生效）
+
+# 注释掉以下字段
+/dev/mapper/cl-swap     swap                    swap    defaults        0 0
+
+安装Docker
+卸载老版本的Docker
+
+如果有没有老版本Docker，则不需要这步
+
+```
+yum remove docker \
+           docker-common \
+           docker-selinux \
+           docker-engine
+```
+
+使用yum进行安装
+
+每个节点均要安装，目前官网建议安装17.03版本的docker，官网链接
+
+# step 1: 安装必要的一些系统工具
+
+sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+
+# Step 2: 添加软件源信息
+
+sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+
+# Step 3: 更新并安装 Docker-CE
+
+sudo yum makecache fast
+
+sudo yum -y install docker-ce docker-ce-selinux
+
+```
+# 注意：
+# 官方软件源默认启用了最新的软件，您可以通过编辑软件源的方式获取各个版本的软件包。例如官方并没有将测试版本的软件源置为可用，你可以通过以下方式开启。同理可以开启各种测试版本等。
+# vim /etc/yum.repos.d/docker-ce.repo
+#   将 [docker-ce-test] 下方的 enabled=0 修改为 enabled=1
+#
+# 安装指定版本的Docker-CE:
+# Step 3.1: 查找Docker-CE的版本:
+# yum list docker-ce.x86_64 --showduplicates | sort -r
+#   Loading mirror speeds from cached hostfile
+#   Loaded plugins: branch, fastestmirror, langpacks
+#   docker-ce.x86_64            17.03.1.ce-1.el7.centos            docker-ce-stable
+#   docker-ce.x86_64            17.03.1.ce-1.el7.centos            @docker-ce-stable
+#   docker-ce.x86_64            17.03.0.ce-1.el7.centos            docker-ce-stable
+#   Available Packages
+```
+# Step 3.2 : 安装指定版本的Docker-CE: (VERSION 例如上面的 17.03.0.ce.1-1.el7.centos)
+
+sudo yum -y --setopt=obsoletes=0 install docker-ce-[VERSION] \
+docker-ce-selinux-[VERSION]
+
+sudo yum -y --setopt=obsoletes=0 install docker-ce-17.03.0.ce-1.el7.centos \
+docker-ce-selinux-17.03.0.ce-1.el7.centos
+
+# Step 4: 开启Docker服务
+
+sudo systemctl enable docker && systemctl start docker
+
+docker安装问题小结
+
+错误信息
+
+```
+Error: Package: docker-ce-17.03.2.ce-1.el7.centos.x86_64 (docker-ce-stable)
+           Requires: docker-ce-selinux >= 17.03.2.ce-1.el7.centos
+           Available: docker-ce-selinux-17.03.0.ce-1.el7.centos.noarch (docker-ce-stable)
+               docker-ce-selinux = 17.03.0.ce-1.el7.centos
+           Available: docker-ce-selinux-17.03.1.ce-1.el7.centos.noarch (docker-ce-stable)
+               docker-ce-selinux = 17.03.1.ce-1.el7.centos
+           Available: docker-ce-selinux-17.03.2.ce-1.el7.centos.noarch (docker-ce-stable)
+               docker-ce-selinux = 17.03.2.ce-1.el7.centos
+ You could try using --skip-broken to work around the problem
+ You could try running: rpm -Va --nofiles --nodigest
+```
+
+解决办法
+
+# 要先安装docker-ce-selinux-17.03.2.ce，否则安装docker-ce会报错
+# 注意docker-ce-selinux的版本 要与docker的版本一致
+
+yum install -y https://download.docker.com/linux/centos/7/x86_64/stable/Packages/docker-ce-selinux-17.03.2.ce-1.el7.centos.noarch.rpm
+
+# 或者
+
+yum -y install https://mirrors.aliyun.com/docker-ce/linux/centos/7/x86_64/stable/Packages/docker-ce-selinux-17.03.2.ce-1.el7.centos.noarch.rpm
+
+参考链接
