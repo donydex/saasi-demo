@@ -96,3 +96,19 @@ https://blog.csdn.net/ilove737/article/details/48372281
 docker rename old容器名  new容器名
 
 
+## 清空集群
+
+参考链接: http://dockone.io/question/1076
+
+kubectl delete services --all
+
+kubectl delete pods --all
+
+kubectl delete deployments --all
+
+注意必须删除所有的deployments才可以防止重新生成
+
+无论各种方式生成的pod, 均可以使用如下命令强制删除: kubectl delete pods <pod> --grace-period=0 --force 
+
+
+
