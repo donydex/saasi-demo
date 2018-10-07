@@ -289,13 +289,10 @@ yum install -y https://download.docker.com/linux/centos/7/x86_64/stable/Packages
 yum -y install https://mirrors.aliyun.com/docker-ce/linux/centos/7/x86_64/stable/Packages/docker-ce-selinux-17.03.2.ce-1.el7.centos.noarch.rpm
 
 # Docker 配置国内镜像源加速
-
+```
 cat << EOF >> /etc/docker/daemon.json
-
 {
-
         "registry-mirrors": ["https://registry.docker-cn.com"]
-
 }
-
 EOF
+```
