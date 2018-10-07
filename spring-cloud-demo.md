@@ -23,6 +23,20 @@ spring-boot-cloud/svca-service
 
 spring-boot-cloud/svcb-service
 
+## 打jar包
+
+mvn 加-f参数可以指定执行文件目录
+
+```
+mvn clean install -f spring-boot-cloud/registry
+mvn clean install -f spring-boot-cloud/config
+mvn clean install -f spring-boot-cloud/monitor
+mvn clean install -f spring-boot-cloud/zipkin
+mvn clean install -f spring-boot-cloud/gateway
+mvn clean install -f spring-boot-cloud/auth-service
+mvn clean install -f spring-boot-cloud/svca-service
+mvn clean install -f spring-boot-cloud/svcb-service
+
 ## 拉取脚本
 
 cd ..
