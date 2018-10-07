@@ -5,23 +5,17 @@
 
 ## 镜像名
 
+```
 rabbitmq:3-management
-
 spring-boot-cloud/registry
-
 spring-boot-cloud/config
-
 spring-boot-cloud/monitor
-
 spring-boot-cloud/zipkin
-
 spring-boot-cloud/gateway
-
 spring-boot-cloud/auth-service
-
 spring-boot-cloud/svca-service
-
 spring-boot-cloud/svcb-service
+```
 
 ## 打jar包
 
