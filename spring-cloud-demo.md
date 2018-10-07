@@ -36,10 +36,10 @@ mvn clean install -f spring-boot-cloud/gateway
 mvn clean install -f spring-boot-cloud/auth-service
 mvn clean install -f spring-boot-cloud/svca-service
 mvn clean install -f spring-boot-cloud/svcb-service
-
+```
 ## 拉取脚本
 
-cd ..
+
 ```
 docker build --rm -t spring-boot-cloud/registry spring-boot-cloud/registry
 docker build --rm -t spring-boot-cloud/config spring-boot-cloud/config
