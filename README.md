@@ -291,7 +291,11 @@ yum -y install https://mirrors.aliyun.com/docker-ce/linux/centos/7/x86_64/stable
 # Docker 配置国内镜像源加速
 
 cat << EOF >> /etc/docker/daemon.json
+
 {
+
         "registry-mirrors": ["https://registry.docker-cn.com"]
+
 }
+
 EOF
