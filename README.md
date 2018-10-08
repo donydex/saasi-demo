@@ -21,6 +21,7 @@ git clone https://github.com/donydex/saasi-demo.git
     <name>Nexus aliyun</name>  
     <url>http://maven.aliyun.com/nexus/content/groups/public</url>  
 </mirror> 
+
 ------------------------------------------
 # 数据库安装部分：
 查找docker镜像
