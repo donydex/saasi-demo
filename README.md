@@ -14,14 +14,14 @@ git clone https://github.com/donydex/saasi-demo.git
 
 /usr/local/webserver/apache-maven-3.3.9/conf
 添加:
-
+```
 <mirror>  
     <id>nexus-aliyun</id>  
     <mirrorOf>central</mirrorOf>    
     <name>Nexus aliyun</name>  
     <url>http://maven.aliyun.com/nexus/content/groups/public</url>  
 </mirror> 
-
+```
 ------------------------------------------
 # 数据库安装部分：
 查找docker镜像
