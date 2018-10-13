@@ -228,3 +228,6 @@ networks:
   dockercoins: 
 
 ```
+
+docker stats 看内存，cpu等情况
+docker stack logs -f stack名 看stack
