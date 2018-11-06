@@ -1,0 +1,6 @@
+1.windows 数据库设置
+
+登陆
+
+mysql -u root -p 
+root
